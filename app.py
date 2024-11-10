@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
-
 import aws_cdk as cdk
-
-from cdk_workshop.cdk_workshop_stack import CdkWorkshopStack
-
+from cdk_workshop.pipeline_stack import WorkshopPipelineStack
 
 app = cdk.App()
-CdkWorkshopStack(app, "CdkWorkshopStack")
+WorkshopPipelineStack(
+    app,
+    "WorkshopPipelineStack",
+    env=cdk.Environment(account="683172810798", region="us-west-2"),
+)
 
 app.synth()
