@@ -3,6 +3,7 @@ from aws_cdk import (
     Stack,
     pipelines as pipelines,
 )
+from cdk_workshop.pipeline_stage import WorkshopPipelineStage
 
 
 class WorkshopPipelineStack(Stack):
@@ -10,8 +11,6 @@ class WorkshopPipelineStack(Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
-        # Creates a CodeCommit repository called 'WorkshopRepo'
-        # Step 1: Create a CodeStar Connection for GitHub
         # Pipeline code goes here
         pipeline = pipelines.CodePipeline(
             self,
@@ -31,3 +30,5 @@ class WorkshopPipelineStack(Stack):
                 ],
             ),
         )
+        deploy = WorkshopPipelineStage(self, "Deploy")
+        deploy_stage = pipeline.add_stage(deploy)
